@@ -228,7 +228,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: d669e4b84151f0c499a4eee3020e32bb, type: 2}
     - target: {fileID: 919132149155446097, guid: 55e6421451c0eaf47ad91b75ae1ed266, type: 3}
       propertyPath: m_Name
-      value: "A\u7C7B\u673A\u68B0-op"
+      value: obj
       objectReference: {fileID: 0}
     - target: {fileID: 3669706955234483371, guid: 55e6421451c0eaf47ad91b75ae1ed266, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -346,4 +346,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fromToZ: {x: -3.86, y: 3.87}
-  count: 256
+  path: OutPut~

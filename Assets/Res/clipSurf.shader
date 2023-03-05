@@ -1,8 +1,8 @@
-Shader "Unlit/NewUnlitShader"
+Shader "Xd/Unlit/clipSurf"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
+
     }
     SubShader
     {
@@ -29,24 +29,18 @@ Shader "Unlit/NewUnlitShader"
             {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
-                float2 uv : TEXCOORD0;
             };
 
             struct v2f
             {
-                float2 uv : TEXCOORD0;
                 float3 normal : NORMAL;
                 float4 vertex : SV_POSITION;
             };
-
-            sampler2D _MainTex;
-            float4 _MainTex_ST;
 
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 o.normal = normalize(v.normal);
                 return o;
             }

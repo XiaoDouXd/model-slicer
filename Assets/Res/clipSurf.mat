@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: "\u65B0\u5EFA\u6750\u8D28"
+  m_Name: clipSurf
   m_Shader: {fileID: 4800000, guid: db74c4beb0f81224688d4b39d6b4b4dc, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
