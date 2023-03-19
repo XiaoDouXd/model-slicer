@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class CameraMove : MonoBehaviour
 {
+    public LoadingUI cover;
+    
     public Vector2 fromToZ = new(-3.847f, 3.82f);
     public string path = "OutPut~";
 
@@ -118,14 +120,15 @@ public class CameraMove : MonoBehaviour
 
     // ------------------------------------------------------------
 
-    void Awake()
+    private void Awake()
     {
+        cover = GetComponent<LoadingLink>().cover;
         _transf = GetComponent<Transform>();
         if (!_transf) Debug.LogError("Cant find transform component in the obj self");
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    private void LateUpdate()
     {
         var limit = PosLimit;
         var zPos = _transf.position.z;
@@ -145,7 +148,8 @@ public class CameraMove : MonoBehaviour
 
         if (_savingAll)
         {
-            if (_curCount == 0) { _savingAll = false; return; }
+            if (!cover.gameObject.activeSelf) { cover.gameObject.SetActive(true); }
+            if (_curCount == 0) { _savingAll = false; cover.gameObject.SetActive(false); return; }
             _curCount--;
             if (_curCount >= _offset.Count)
             {
@@ -162,9 +166,53 @@ public class CameraMove : MonoBehaviour
         }
     }
 
-    void OnRenderImage(RenderTexture source, RenderTexture destination)
+    private Texture2D _saveTex;
+    private void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
-        if (SaveFrame || _savingAll)
+        if (_savingAll)
+        {
+            if (!_saveTex) _saveTex = new Texture2D(4096, 4096, TextureFormat.RGBA32, false);
+            if (_curCount == 0)
+            {
+                _curCount = (uint)_lastI;
+                _savingAll = false;
+
+                var posX = (int)_curCount % 16;
+                var posY = (int)_curCount / 16;
+                RenderTexture.active = source;
+                _saveTex.ReadPixels(new Rect(0, 0, source.width, source.height), 
+                    posX * source.width, posY * source.height);
+                _saveTex.Apply();
+                RenderTexture.active = null;
+                
+                var bytes = _saveTex.EncodeToPNG();
+                if (!System.IO.File.Exists(Application.streamingAssetsPath + $"/{path}/OutPut.png"))
+                {
+                    if (!System.IO.Directory.Exists(Application.streamingAssetsPath + $"/{path}/"))
+                        System.IO.Directory.CreateDirectory(Application.streamingAssetsPath + $"/{path}/");
+                    var s = System.IO.File.Create(Application.streamingAssetsPath + $"/{path}/OutPut.png");
+                    s.Write(bytes); s.Close();
+                }
+                else
+                {
+                    System.IO.File.WriteAllBytes(Application.streamingAssetsPath + $"/{path}/OutPut.png", bytes);
+                }
+                Destroy(_saveTex);
+                _saveTex = null;
+                cover.gameObject.SetActive(false);
+            }
+            else
+            {
+                var posX = (int)_curCount % 16;
+                var posY = (int)_curCount / 16;
+                RenderTexture.active = source;
+                _saveTex.ReadPixels(new Rect(0, 0, source.width, source.height), 
+                    posX * source.width, posY * source.height);
+                RenderTexture.active = null;
+            }
+        }
+        
+        if (SaveFrame)
         {
             SaveFrame = false;
             if (_curCount == 0)

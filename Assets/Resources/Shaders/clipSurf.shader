@@ -53,7 +53,7 @@ Shader "Xd/Unlit/clipSurf"
                 float a = dot(float3(0, 0, -1), i.normal) > 0 ? 1 : 0; //dot(vCamera, i.normal) * 0.5 + 0.5;// > 0 ? 0 : 1;
 
                 col.a = a;
-                col.rgb = float3(lerp(0.03, 1, a), 0.04, 0.02);
+                col.rgb = a < 0.5 ? float3(lerp(0.03, 1, a), 0.04, 0.02) : float3(1, 1, 1);
 
                 return col;
             }

@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2053447235328407318
 RectTransform:
   m_ObjectHideFlags: 0
@@ -338,7 +338,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2053447235786998559}
         m_TargetAssemblyTypeName: AP.UI.APFileDataUI, Assembly-CSharp
-        m_MethodName: NewCanvas
+        m_MethodName: OnOutPut
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -457,6 +457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a93f3f78915c374c8c47645515d25a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camMove: {fileID: 0}
   maxWidth: 16384
   maxHeight: 16384
   widthInput: {fileID: 2053447236450467971}
@@ -961,7 +962,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2053447236450467974
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1200,7 +1201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2053447236540098967
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1439,7 +1440,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2053447237312736671
 RectTransform:
   m_ObjectHideFlags: 0

@@ -78,21 +78,15 @@ namespace AP.UI
 
         private void SetVal(int val)
         {
-            switch (channel)
+            if (!_picker) return;
+            _color = channel switch
             {
-                case ColorChannel.R:
-                    _color = new Color(val / 255.0f, _color.g, _color.b, _color.a);
-                    break;
-                case ColorChannel.G:
-                    _color = new Color(_color.r,val / 255.0f , _color.b, _color.a);
-                    break;
-                case ColorChannel.B:
-                    _color = new Color(_color.r, _color.g, val / 255.0f, _color.a);
-                    break;
-                case ColorChannel.A:
-                    _color = new Color(_color.r, _color.g, _color.b, val / 255.0f);
-                    break;
-            }
+                ColorChannel.R => new Color(val / 255.0f, _color.g, _color.b, _color.a),
+                ColorChannel.G => new Color(_color.r, val / 255.0f, _color.b, _color.a),
+                ColorChannel.B => new Color(_color.r, _color.g, val / 255.0f, _color.a),
+                ColorChannel.A => new Color(_color.r, _color.g, _color.b, val / 255.0f),
+                _ => _color
+            };
 
             bg.material.SetColor(TargetColor, _color);
             _picker.UpdateAllBySlider(_color);

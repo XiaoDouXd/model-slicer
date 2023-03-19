@@ -9,7 +9,6 @@ public class CameraMoveEditor : Editor
     public override void OnInspectorGUI()
     {
         CameraMove t = (CameraMove)target;
-
         if (!t.Saving)
         {
             t.fromToZ = EditorGUILayout.Vector2Field("Zpos ∆ º÷’÷πŒª÷√", t.fromToZ);

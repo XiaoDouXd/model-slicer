@@ -5,6 +5,8 @@ namespace AP.UI
 {
     public class APFileDataUI : MonoBehaviour
     {
+        public CameraMove camMove;
+        
         public int maxWidth;
         public int maxHeight;
         
@@ -75,6 +77,11 @@ namespace AP.UI
                 APInitMgr.I.surfaceRoot.gameObject);
             canvas.SetActive(true);
             mask.SetActive(true);
+        }
+
+        public void OnOutPut()
+        {
+            camMove.OutPutAll();
         }
     }
 }
