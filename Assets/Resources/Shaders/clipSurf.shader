@@ -32,29 +32,26 @@ Shader "Xd/Unlit/clipSurf"
                 float3 normal : NORMAL;
             };
 
-            struct v2f
+            struct pixel_data
             {
                 float3 normal : NORMAL;
                 float4 vertex : SV_POSITION;
             };
 
-            v2f vert (appdata v)
+            pixel_data vert (const appdata v)
             {
-                v2f o;
+                pixel_data o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.normal = UnityObjectToWorldNormal(v.normal);
                 return o;
             }
 
-            float4 frag(const v2f i) : SV_Target
+            float4 frag(const pixel_data p) : SV_Target
             {
-                float4 col = float4(0.03, 0.04, 0.02, 0);
-                const float3 v_camera = UNITY_MATRIX_V[2].xyz;
-                const float a = dot(v_camera, i.normal) < 0 ? 1 : 0;
-
-                col.a = a;
-                col.rgb = a < 0.5 ? float3(lerp(0.03, 1, a), 0.04, 0.02) : float3(1, 1, 1);
-                return col;
+                // UNITY_MATRIX_V[2】 是当前相机在世界空间中的视线方向 - float3
+                // p.normal 是当前像素在世界空间中的法线方向 - float3
+                return dot(UNITY_MATRIX_V[2].xyz, p.normal) > 0 ?
+                    float4(0, 0, 0, 0) : float4(1, 1, 1, 1);
             }
             ENDCG
         }
