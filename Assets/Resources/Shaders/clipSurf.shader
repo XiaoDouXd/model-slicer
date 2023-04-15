@@ -42,19 +42,18 @@ Shader "Xd/Unlit/clipSurf"
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.normal = UnityObjectToClipPos(normalize(v.normal));
+                o.normal = UnityObjectToWorldNormal(v.normal);
                 return o;
             }
 
-            float4 frag(v2f i) : SV_Target
+            float4 frag(const v2f i) : SV_Target
             {
-                float4 col = float4(0.03, 0.04, 0.02, 0);// = tex2D(_MainTex, i.uv);
-                float3 vCamera = normalize(UNITY_MATRIX_V[2].xyz);
-                float a = dot(float3(0, 0, -1), i.normal) > 0 ? 1 : 0; //dot(vCamera, i.normal) * 0.5 + 0.5;// > 0 ? 0 : 1;
+                float4 col = float4(0.03, 0.04, 0.02, 0);
+                const float3 v_camera = UNITY_MATRIX_V[2].xyz;
+                const float a = dot(v_camera, i.normal) < 0 ? 1 : 0;
 
                 col.a = a;
                 col.rgb = a < 0.5 ? float3(lerp(0.03, 1, a), 0.04, 0.02) : float3(1, 1, 1);
-
                 return col;
             }
             ENDCG

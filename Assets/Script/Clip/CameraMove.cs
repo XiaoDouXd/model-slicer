@@ -197,7 +197,7 @@ public class CameraMove : MonoBehaviour
                 {
                     System.IO.File.WriteAllBytes(Application.streamingAssetsPath + $"/{path}/OutPut.png", bytes);
                 }
-                Destroy(_saveTex);
+                DestroyImmediate(_saveTex);
                 _saveTex = null;
                 cover.gameObject.SetActive(false);
             }
