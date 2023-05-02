@@ -6,20 +6,20 @@
 
 
 
-![anim](Assets/Res/result/anim.gif)
+![anim](Assets/TempRes/result/anim.gif)
 
 控制面板：
 
-![ctrlPanel](Assets/Res/result/ctrlPanel.png)
+![ctrlPanel](Assets/TempRes/result/ctrlPanel.png)
 
 导出结果（部分）：
 
-![38](Assets/Res/result/38.png)
+![38](Assets/TempRes/result/38.png)
 
-![45](Assets/Res/result/45.png)
+![45](Assets/TempRes/result/45.png)
 
-![49](Assets/Res/result/49.png)
+![49](Assets/TempRes/result/49.png)
 
-![55](Assets/Res/result/55.png)
+![55](Assets/TempRes/result/55.png)
 
 20230305
